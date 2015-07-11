@@ -1,0 +1,121 @@
+/************************************************************
+                       COMMENTS
+************************************************************/
+
+#comments,
+#new-comment {
+    display: none;
+}
+
+/************************************************************
+                        HOME
+************************************************************/
+.btn a,
+.btn > input {
+    text-decoration: none;
+    border: 1px solid;
+    border-radius: 5px;
+    padding: 8px;
+    color: black;
+    background-color: white;
+    font-size: 14px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.btn a:hover,
+.btn > input:hover {
+    background-color: #eeeeee;
+    color: black;
+    cursor: pointer;
+}
+
+.btn {
+    margin: 20px 10px 0;
+    padding-bottom: 30px;
+}
+
+.clear {
+    clear: both;
+}
+
+.container {
+    width: 960px;
+    margin: 0 auto;
+}
+
+
+.links a,
+.post h2 > a {
+    display: inline;
+    color: darkblue;
+    text-decoration: none;
+}
+
+.links a:hover,
+.post h2 > a:hover {
+    color: dodgerblue;
+}
+
+.post,
+.comment{
+    padding: 30px 20px 10px;
+    border-bottom: 1px solid #888888;
+}
+
+.posts > .post:nth-child(odd),
+.comments > .comment:nth-child(odd) {
+    background-color: #eeeeee;
+}
+
+.pull-right {
+    float: right;
+}
+
+.pull-left {
+    float: left;
+}
+
+/************************************************************
+                        POST
+************************************************************/
+.comments>.comment:last-child {
+    border-bottom: 0;
+}
+
+.links > div {
+    display: inline-block;
+    padding-bottom: 3px;
+    padding-top: 20px;
+}
+
+#id-text,
+#id_description {
+    width: 400px;
+    height: 150px;
+    border-radius: 10px;
+    resize: none;
+    padding: 10px;
+    border: 1px solid #cccccc;
+}
+
+#id-text:focus {
+    outline: none;
+    border-color: #003366;
+}
+
+form label {
+    display: block;
+    padding-bottom: 10px;
+}
+
+#id_link,
+#id_title{
+    width: 400px;
+    border-radius: 3px;
+    border: 1px solid #cccccc;
+    padding: 3px 10px;
+}
+
+.helptext {
+    display: block;
+}

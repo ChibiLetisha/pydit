@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load humanize %}
+
+{% block extrabtns %}
+    <div class="btn pull-left">
+        <a href="{% url "home" %}">Back</a>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="post">
+        <h2><a href="{% if post.link %}{{ post.link }}{% endif %}" target="_blank">{{ post.title }}</a></h2>
+        <p>Posted {{ object.created|naturaltime }}, by {{ object.created_by }}</p>
+        <p>{{ object.description }}</p>
+        <div class="comments-container">
+            <div class="links">
+                <a href="{% url "vote" post.slug "y" %}">Me Likey! ({{ post.get_positive_votes }})</a> |
+                <a href="{% url "vote" post.slug "n" %}">Me No Likey! ({{ post.get_negative_votes }})</a>
+            </div>
+            <div class="links">
+                {% if user.is_authenticated %}
+                    <div class="comment-expand">
+                        <a href="#">New Comment</a> |
+                    </div>
+                {% endif %}
+                <div class="expand">
+                    <a href="#">Comments ({{ object.comments.count }})</a>
+                </div>
+            </div>
+            <div id="new-comment">
+                <form action="{% url "new-comment" object.slug %}" method="post">
+                    {% csrf_token %}
+                    <label for="id-text">
+                        <textarea name="text" id="id-text" required placeholder="Write your comment here!"></textarea>
+                    </label>
+                    <div class="btn">
+                        <input type="submit" value="Create" />
+                    </div>
+                </form>
+            </div>
+            <div id="comments" class="comments">
+            {% for comment in object.comments.all %}
+                <div class="comment">
+                    <b>{{ comment.created_by }}</b> commented {{ comment.created|naturaltime }}:
+                    <p>{{ comment.text }}</p>
+                </div>
+            {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block extrajs %}
+    <script>
+        $('.expand').on('click', function () {
+            $('#comments').toggle()
+        });
+        $('.comment-expand').on('click', function () {
+            $('#new-comment').toggle()
+        });
+    </script>
+{% endblock %}

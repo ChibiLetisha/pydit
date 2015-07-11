@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load humanize %}
+
+{% block extrabtns %}
+    {% if user.is_authenticated %}
+        <div class="btn pull-left">
+            <a href="{% url "new-post" %}">New Post</a>
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    <div class="posts">
+    {% for post in object_list %}
+        <div class="post">
+            <h2><a href="{% if post.link %}{{ post.link }}{% else %}{% url "post" post.slug %}{% endif %}"
+                   target="_blank">{{ post.title }}</a></h2>
+            <p>Posted {{ post.created|naturaltime }}, by {{ post.created_by }}</p>
+            {{ post.description|truncatechars_html:90 }}
+            <div class="links">
+                <br><br>
+                <a href="{% url "post" post.slug %}">Read More</a> |
+                <a href="{% url "post" post.slug %}#comments">Comments</a> ({{ post.comments.count }})
+            </div>
+            <div class="links">
+                <a href="{% url "vote" post.slug "y" %}">Me Likey! ({{ post.get_positive_votes }})</a> |
+                <a href="{% url "vote" post.slug "n" %}">Me No Likey! ({{ post.get_negative_votes }})</a>
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+{% endblock %}
