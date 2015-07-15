@@ -63,7 +63,8 @@ class NewComment(LoginRequiredMixin, CreateView):
     model = Comment
     fields = ['text']
 
-    def get(self, request, *args, **kwargs):
+    @staticmethod
+    def get(request, *args, **kwargs):
         raise Http404
 
     def form_valid(self, form):
@@ -133,6 +134,7 @@ class Register(CreateView):
 
     def get_form_class(self):
         return modelform_factory(self.model, fields=self.fields, widgets=self.widgets)
+
 
 class VoteView(RedirectView):
     """

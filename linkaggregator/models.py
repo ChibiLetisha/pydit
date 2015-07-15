@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from django.db import models
 
-# Create your models here.
+
 class Comment(models.Model):
     text = models.TextField()
     created_by = models.ForeignKey(User)
